@@ -1,0 +1,64 @@
+﻿@model CanadaPostRates.Models.FinalPrice
+
+
+@{
+    ViewBag.Title = "Rates";
+}
+
+@if (Model != null && ViewBag.ErrorMessage == null)
+{
+    <h2>Price of shipping via Canada Post</h2>
+
+    <br />
+
+    <p>Origin Postalcode: @Model.originpostalcode</p>
+
+    <br />
+
+    <p>Destination Postalcode: @Model.destinationpostalcode</p>
+
+    <br />
+
+    <p>Parcel weight: @Model.parcelweight Kg</p>
+
+    <br />
+
+    <table class="table">
+        <tr>
+            <th>
+                Service Type
+            </th>
+            <th>
+                Transit Day
+            </th>
+            <th>
+                Regular Price
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.RatesList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransitDay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegularPrice)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <h2 style="color:#FF0000">@ViewBag.ErrorMessage</h2>
+}
+<div>
+    @Html.ActionLink("Back Home", "Index")
+</div>
